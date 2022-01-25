@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text } from "react-native";
+import React, { useState } from "react";
+import Home from "./components/home";
+import { useEffect } from "react";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { db } from "./config/firebase";
+import AddService from './components/AddService';
 
 export default function App() {
+  const [Service, setService] = useState([]);
+  useEffect(() => {
+    const serviceRef = collection(db, "Services");
+    const q = query(serviceRef, orderBy("name", "desc"));
+
+    onSnapshot(q, (snapshot) => {
+      const services = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setService(services);
+      console.log(services);
+    });
+  }, []);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <AddService/>
+      <Text>we have {Service.length} services</Text>
+      {Service.map((s) => {
+        return (
+          <Home
+            key={s.id}
+            name={s.name}
+            duration={s.duration}
+            price={s.price}
+            id={s.id}
+          />
+        );
+      })}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
