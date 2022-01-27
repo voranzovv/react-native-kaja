@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "./config/firebase";
 import AddService from './components/AddService';
+import Register from './components/Auth/Register';
 
 export default function App() {
   const [Service, setService] = useState([]);
@@ -23,7 +24,8 @@ export default function App() {
   }, []);
   return (
     <View>
-      <AddService/>
+      <Register/>
+      {/* <AddService/>
       <Text>we have {Service.length} services</Text>
       {Service.map((s) => {
         return (
@@ -35,7 +37,7 @@ export default function App() {
             id={s.id}
           />
         );
-      })}
+      })} */}
     </View>
   );
 }
