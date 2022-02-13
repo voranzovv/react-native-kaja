@@ -6,6 +6,7 @@ import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "./config/firebase";
 import AddService from './components/AddService';
 import Register from './components/Auth/Register';
+import Booking from './components/booking';
 
 export default function App() {
   const [Service, setService] = useState([]);
@@ -24,9 +25,9 @@ export default function App() {
   }, []);
   return (
     <View>
-      <Register/>
-      {/* <AddService/>
-      <Text>we have {Service.length} services</Text>
+      {/* <Register/> */}
+      {/* <AddService/> */}
+      {/* <Text>we have {Service.length} services</Text> */}
       {Service.map((s) => {
         return (
           <Home
@@ -37,7 +38,10 @@ export default function App() {
             id={s.id}
           />
         );
-      })} */}
+      })}
+
+      <Booking/>
+      
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button,StyleSheet } from "react-native";
 import React, { useState } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -9,13 +9,22 @@ import {
 import { auth } from "../../config/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
+const classes = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+});
+
 export default function Register() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
-  //   console.log(user);
+  console.log(user);
 
   const handleRegister = () => {
     console.log("registering");
@@ -38,7 +47,7 @@ export default function Register() {
       });
   };
   return (
-    <View>
+    <View className={classes.container}>
       <Text>Register</Text>
       <TextInput
         placeholder={"name"}
@@ -70,6 +79,9 @@ export default function Register() {
       />
       <Button title={"Login"} onPress={handleLogin} />
       <Text>{user?.displayName}</Text>
+      <Text>Hello guys</Text>
     </View>
   );
 }
+
+
