@@ -7,28 +7,30 @@ import { db } from "./config/firebase";
 import AddService from './components/AddService';
 import Register from './components/Auth/Register';
 import Booking from './components/booking';
+import Upload from "./components/upload";
+import ImageUpload from "./components/ImgUpload";
 
 export default function App() {
   const [Service, setService] = useState([]);
-  useEffect(() => {
-    const serviceRef = collection(db, "Services");
-    const q = query(serviceRef, orderBy("name", "desc"));
+  // useEffect(() => {
+  //   const serviceRef = collection(db, "Services");
+  //   const q = query(serviceRef, orderBy("name", "desc"));
 
-    onSnapshot(q, (snapshot) => {
-      const services = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setService(services);
-      console.log(services);
-    });
-  }, []);
+  //   onSnapshot(q, (snapshot) => {
+  //     const services = snapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
+  //     setService(services);
+  //     console.log(services);
+  //   });
+  // }, []);
   return (
     <View>
       {/* <Register/> */}
       {/* <AddService/> */}
       {/* <Text>we have {Service.length} services</Text> */}
-      {Service.map((s) => {
+      {/* {Service.map((s) => {
         return (
           <Home
             key={s.id}
@@ -38,9 +40,11 @@ export default function App() {
             id={s.id}
           />
         );
-      })}
+      })} */}
 
-      <Booking/>
+      {/* <Booking/> */}
+      <Upload/>
+      <ImageUpload />
       
     </View>
   );
